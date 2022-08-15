@@ -70,7 +70,8 @@ body {
     margin-bottom: 300px;
 }
 
-span {
+span,
+.text-row {
     font-family: TwitterChirp;
     font-size: 15px;
     line-height: 12px;
@@ -272,11 +273,16 @@ div.row.tweet-row .tweet-body div.right-container div.text-row {
     white-space: pre-line;
 }
 
+div.row.tweet-row .tweet-body div.right-container div.text-row span.at,
 div.row.tweet-row .tweet-body div.right-container div.text-row span.tag {
     display: inline;
-    text-decoration: underline;
     color: var(--link-blue);
     line-height: 20px;
+    cursor: pointer;
+}
+
+div.row.tweet-row .tweet-body div.right-container div.text-row span.tag {
+    text-decoration: underline;
 }
 
 
