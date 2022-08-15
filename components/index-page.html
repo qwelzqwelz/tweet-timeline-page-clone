@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{page_title}</title>
+    <link rel="stylesheet" href="static/twtter-video-box.css" />
+    <link rel="stylesheet" href="static/index.css" />
+</head>
+
+<body>
+    <div id="root">
+        <!-- banner -->
+        <div class="row profile-banner-row">
+            {profile_banner_img}
+        </div>
+        <!-- avatar -->
+        <div class="row avatar-row">
+            <div class="avatar-container">
+                <div class="avatar-circle-wrap">
+                    <img src="{profile_avatar_url}" alt="" />
+                </div>
+            </div>
+        </div>
+        <!-- profile -->
+        <div class="row profile-row">
+            <div class="name">
+                <span>{author_name}</span>
+            </div>
+            <div class="screen-name">
+                <span>@{author_screen_name}</span>
+            </div>
+            <div class="description">
+                <span>{author_description}</span>
+            </div>
+            <div class="location-and-join-date">
+                {author_location_component}
+                <div>
+                    <svg viewBox="0 0 24 24">
+                        <g>
+                            <path
+                                d="M19.708 2H4.292C3.028 2 2 3.028 2 4.292v15.416C2 20.972 3.028 22 4.292 22h15.416C20.972 22 22 20.972 22 19.708V4.292C22 3.028 20.972 2 19.708 2zm.792 17.708c0 .437-.355.792-.792.792H4.292c-.437 0-.792-.355-.792-.792V6.418c0-.437.354-.79.79-.792h15.42c.436 0 .79.355.79.79V19.71z">
+                            </path>
+                            <circle cx="7.032" cy="8.75" r="1.285"></circle>
+                            <circle cx="7.032" cy="13.156" r="1.285"></circle>
+                            <circle cx="16.968" cy="8.75" r="1.285"></circle>
+                            <circle cx="16.968" cy="13.156" r="1.285"></circle>
+                            <circle cx="12" cy="8.75" r="1.285"></circle>
+                            <circle cx="12" cy="13.156" r="1.285"></circle>
+                            <circle cx="7.032" cy="17.486" r="1.285"></circle>
+                            <circle cx="12" cy="17.486" r="1.285"></circle>
+                        </g>
+                    </svg>
+                    <span>Joined {author_created_at}</span>
+                </div>
+            </div>
+            <div class="follow-status">
+                <span class="num">{author_following_count}</span>
+                <span class="label">Following</span>
+                <span class="num">{author_followers_count}</span>
+                <span class="label">Followers</span>
+            </div>
+        </div>
+        <!-- tweets -->
+        <div class="row tweets-list-row">
+            {tweet_timeline}
+        </div>
+    </div>
+</body>
+
+<script src="static/jquery-3.6.0.min.js"></script>
+<script src="static/twitter-video-box.js"></script>
+
+</html>

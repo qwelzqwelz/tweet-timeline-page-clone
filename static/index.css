@@ -1,0 +1,355 @@
+:root {
+    --font-gray: rgb(83, 100, 113);
+    --font-black: rgb(15, 20, 25);
+    --border-gray: #f0f3f4;
+    --link-blue: rgb(29, 155, 240);
+    /* hover */
+    --hover-blue: rgb(40, 144, 215);
+    --hover-green: rgb(3, 183, 124);
+    --hover-red: rgb(221, 37, 126);
+}
+
+@font-face {
+    font-family: TwitterChirpExtendedHeavy;
+    src: url(../fonts/chirp-extended-heavy-web.woff2) format("woff2");
+    src: url(../fonts/chirp-extended-heavy-web.woff) format("woff");
+    font-weight: 800;
+    font-style: "normal";
+    font-display: "swap";
+}
+
+@font-face {
+    font-family: TwitterChirp;
+    src: url(../fonts/chirp-regular-web.woff2) format("woff2");
+    src: url(../fonts/chirp-regular-web.woff) format("woff");
+    font-weight: 400;
+    font-style: "normal";
+    font-display: "swap";
+}
+
+@font-face {
+    font-family: TwitterChirp;
+    src: url(../fonts/chirp-medium-web.woff2) format("woff2");
+    src: url(../fonts/chirp-medium-web.woff) format("woff");
+    font-weight: 500;
+    font-style: "normal";
+    font-display: "swap";
+}
+
+@font-face {
+    font-family: TwitterChirp;
+    src: url(../fonts/chirp-bold-web.woff2) format("woff2");
+    src: url(../fonts/chirp-bold-web.woff) format("woff");
+    font-weight: 700;
+    font-style: "normal";
+    font-display: "swap";
+}
+
+@font-face {
+    font-family: TwitterChirp;
+    src: url(../fonts/chirp-heavy-web.woff2) format("woff2");
+    src: url(../fonts/chirp-heavy-web.woff) format("woff");
+    font-weight: 800;
+    font-style: "normal";
+    font-display: "swap";
+}
+
+
+/* 基本样式 */
+
+html,
+body {
+    margin: 0;
+}
+
+#root {
+    border: solid 1px var(--border-gray);
+    border-top: none;
+    width: 50%;
+    margin-left: 25%;
+    margin-bottom: 300px;
+}
+
+span {
+    font-family: TwitterChirp;
+    font-size: 15px;
+    line-height: 12px;
+    font-weight: 400;
+    color: var(--font-gray);
+}
+
+
+/* banner */
+
+div.row.profile-banner-row {
+    min-height: 200px;
+    background-color: #d1d9de;
+}
+
+div.row.profile-banner-row img {
+    width: 100%;
+    height: 100%;
+    vertical-align: bottom;
+}
+
+
+/* avatar */
+
+div.avatar-row {
+    position: relative;
+    top: -100px;
+    margin-bottom: -100px;
+}
+
+div.avatar-container {
+    width: 200px;
+    height: 200px;
+    padding: 0;
+    padding-left: 16px;
+}
+
+div.avatar-circle-wrap {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: white;
+}
+
+div.avatar-circle-wrap img {
+    height: calc(100% - 12px);
+    width: calc(100% - 12px);
+    border-radius: 50%;
+    transform: translateX(6px) translateY(6px);
+}
+
+
+/* profile: 全局 */
+
+div.row.profile-row {
+    padding: 12px 16px;
+}
+
+div.row.profile-row>div {
+    margin: 4px 0 12px 0;
+}
+
+
+/* profile: name */
+
+div.row.profile-row div.name span {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--font-black);
+}
+
+div.row.profile-row div.name {
+    margin-bottom: 0;
+}
+
+
+/* profile: description */
+
+div.row.profile-row div.description span {
+    color: var(--font-black);
+}
+
+
+/* profile: location */
+
+div.row.profile-row div.location-and-join-date>* {
+    display: inline;
+}
+
+div.row.profile-row div.location-and-join-date svg {
+    margin-right: 4px;
+    width: 1.25em;
+    height: 1.25em;
+    line-height: 12px;
+    vertical-align: text-bottom;
+    position: relative;
+    fill: var(--font-gray);
+}
+
+div.row.profile-row div.location-and-join-date span {
+    margin-right: 12px;
+}
+
+
+/* profile: follow-status */
+
+div.row.profile-row span {
+    font-size: 14px;
+    line-height: 16px;
+}
+
+div.row.profile-row span.num {
+    color: var(--font-black);
+    font-weight: 700;
+}
+
+div.row.profile-row span.label {
+    margin-right: 20px;
+}
+
+
+/* tweet */
+
+div.row.tweet-row {
+    padding: 12px 16px;
+    border-top: solid 1px var(--border-gray);
+}
+
+div.row.tweet-row .flex-container {
+    display: flex;
+}
+
+div.row.tweet-row div.left-container {
+    width: 48px;
+    margin-right: 12px;
+}
+
+
+/* tweet-header */
+
+div.row.tweet-row .tweet-header {
+    margin: -4px 0 4px 0;
+}
+
+div.row.tweet-row .tweet-header div.left-container {
+    display: flex;
+    align-items: flex-end;
+    justify-content: right;
+}
+
+div.row.tweet-row .tweet-header div.left-container svg {
+    font-size: 13px;
+    fill: var(--font-gray);
+    height: 16px;
+    width: 16px;
+    vertical-align: text-bottom;
+}
+
+div.row.tweet-row .tweet-header div.right-container span {
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 16px;
+}
+
+
+/* tweet-body: avatar */
+
+div.row.tweet-row .tweet-body div.left-container .img-container {
+    width: 48px;
+    height: 48px;
+}
+
+div.row.tweet-row .tweet-body div.left-container img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+
+/* tweet-body: author-row */
+
+div.row.tweet-row .tweet-body div.right-container div.author-row>span {
+    line-height: 20px;
+}
+
+div.row.tweet-row .tweet-body div.right-container div.author-row .author-name {
+    font-weight: 700;
+    color: var(--font-black);
+}
+
+div.row.tweet-row .tweet-body div.right-container div.author-row .dot-span {
+    padding: 0 4px;
+}
+
+
+/* tweet-body: text-row */
+
+div.row.tweet-row .tweet-body div.right-container div.text-row {
+    white-space: pre-line;
+}
+
+div.row.tweet-row .tweet-body div.right-container div.text-row span.tag {
+    display: inline;
+    text-decoration: underline;
+    color: var(--link-blue);
+    line-height: 20px;
+}
+
+
+/* tweet-body: media-row */
+
+div.row.tweet-row .tweet-body div.right-container div.media-row>* {
+    margin-top: 12px;
+}
+
+div.row.tweet-row .tweet-body div.right-container div.media-row .media-photos-container {
+    border-radius: 16px;
+    border: 1px solid var(--border-gray);
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+}
+
+div.row.tweet-row .tweet-body div.right-container div.media-row .media-photos-container img {
+    width: 50%;
+}
+
+div.row.tweet-row .tweet-body div.right-container div.media-row .video-box-container {
+    border-radius: 16px;
+    border: 1px solid var(--border-gray);
+    overflow: hidden;
+}
+
+
+/* tweet-body: footer-row */
+
+div.row.tweet-row .tweet-body div.right-container div.footer-row {
+    display: flex;
+    align-items: stretch;
+    height: 20px;
+    margin-top: 12px;
+    column-gap: 8px;
+    justify-content: space-between;
+    width: 70%;
+    margin-left: 15%;
+}
+
+div.row.tweet-row .tweet-body div.right-container div.footer-row .footer-elem {
+    display: flex;
+    cursor: pointer;
+}
+
+div.row.tweet-row .tweet-body div.right-container div.footer-row .footer-elem[title="comment-count"]:hover>* {
+    color: var(--hover-blue);
+    fill: var(--hover-blue);
+}
+
+div.row.tweet-row .tweet-body div.right-container div.footer-row .footer-elem[title="retweet-count"]:hover>* {
+    color: var(--hover-green);
+    fill: var(--hover-green);
+}
+
+div.row.tweet-row .tweet-body div.right-container div.footer-row .footer-elem[title="like-count"]:hover>* {
+    color: var(--hover-red);
+    fill: var(--hover-red);
+}
+
+div.row.tweet-row .tweet-body div.right-container div.footer-row svg {
+    width: 1.25em;
+    height: 1.25em;
+    line-height: 20px;
+    vertical-align: text-bottom;
+    position: relative;
+    fill: var(--font-gray);
+}
+
+div.row.tweet-row .tweet-body div.right-container div.footer-row span {
+    font-size: 13px;
+    line-height: 20px;
+    min-width: calc(1em + 24px);
+    padding: 0 12px;
+}
