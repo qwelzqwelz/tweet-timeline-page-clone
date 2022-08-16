@@ -71,6 +71,16 @@ body {
     margin-bottom: 300px;
 }
 
+@media screen and (max-width: 768px) {
+    html,
+    body,
+    #root,
+    #root>* {
+        width: 100%;
+        margin: 0;
+    }
+}
+
 span,
 .text-row {
     font-family: TwitterChirp;
@@ -92,6 +102,12 @@ div.row.profile-banner-row img {
     width: 100%;
     height: 100%;
     vertical-align: bottom;
+}
+
+@media screen and (max-width: 768px) {
+    div.row.profile-banner-row {
+        min-height: 120px;
+    }
 }
 
 
@@ -122,6 +138,25 @@ div.avatar-circle-wrap img {
     width: calc(100% - 12px);
     border-radius: 50%;
     transform: translateX(6px) translateY(6px);
+}
+
+@media screen and (max-width: 768px) {
+    div.avatar-row {
+        position: relative;
+        top: -60px;
+        margin-bottom: -60px;
+    }
+    div.avatar-container {
+        width: 120px;
+        height: 120px;
+        padding: 0;
+        padding-left: 16px;
+    }
+    div.avatar-circle-wrap img {
+        height: calc(100% - 8px);
+        width: calc(100% - 8px);
+        transform: translateX(4px) translateY(4px);
+    }
 }
 
 
@@ -310,8 +345,15 @@ div.row.tweet-row .tweet-body div.right-container div.text-row span.tag {
     text-decoration: none;
 }
 
+div.row.tweet-row .tweet-body div.right-container div.text-row span.at:hover,
+div.row.tweet-row .tweet-body div.right-container div.text-row span.tag:hover,
+div.row.tweet-row .tweet-body div.right-container div.text-row a:hover {
+    text-decoration: underline;
+}
 
-/* tweet-body: media-row */
+div.row.tweet-row .tweet-body div.right-container div.text-row a,
+
+/* tweet-body: media-row-photo */
 
 div.row.tweet-row .tweet-body div.right-container div.media-row>* {
     margin-top: 12px;
@@ -334,10 +376,10 @@ div.row.tweet-row .tweet-body div.right-container div.media-row .media-photos-co
     background-size: cover;
 }
 
-div.row.tweet-row .tweet-body div.right-container div.media-row .video-box-container {
-    border-radius: 16px;
-    border: 1px solid var(--border-gray);
-    overflow: hidden;
+div.row.tweet-row .tweet-body div.right-container div.media-row .media-photos-container .photo-box img {
+    width: 100%;
+    height: 100%;
+    cursor: zoom-in;
 }
 
 div.row.tweet-row .tweet-body div.right-container div.media-row .media-photos-container.photo-count-0 {
@@ -345,11 +387,22 @@ div.row.tweet-row .tweet-body div.right-container div.media-row .media-photos-co
 }
 
 div.row.tweet-row .tweet-body div.right-container div.media-row .media-photos-container.photo-count-1 {
+    height: 100%;
     max-width: 600px;
+    width: fit-content;
 }
 
 div.row.tweet-row .tweet-body div.right-container div.media-row .media-photos-container.photo-count-1 .photo-box {
-    width: 100%;
+    width: fit-content;
+    height: 100%;
+    min-height: unset;
+    background: none !important;
+}
+
+div.row.tweet-row .tweet-body div.right-container div.media-row .media-photos-container.photo-count-1 .photo-box img {
+    max-width: 500px;
+    max-height: 500px;
+    opacity: 1 !important;
 }
 
 div.row.tweet-row .tweet-body div.right-container div.media-row .media-photos-container.photo-count-3 {
@@ -364,6 +417,52 @@ div.row.tweet-row .tweet-body div.right-container div.media-row .media-photos-co
 
 div.row.tweet-row .tweet-body div.right-container div.media-row .media-photos-container.photo-count-3 .photo-box:first-of-type {
     grid-area: 1 / 1 / span 2 / span 1;
+}
+
+@media screen and (max-width: 768px) {
+    div.row.tweet-row .tweet-body div.right-container div.media-row .media-photos-container .photo-box {
+        min-height: 180px;
+    }
+    div.row.tweet-row .tweet-body div.right-container div.media-row .media-photos-container.photo-count-3 .photo-box {
+        min-height: 150px;
+    }
+    div.row.tweet-row .tweet-body div.right-container div.media-row .media-photos-container.photo-count-1 {
+        max-width: calc(100% - 50px);
+    }
+    div.row.tweet-row .tweet-body div.right-container div.media-row .media-photos-container.photo-count-1 .photo-box,
+    div.row.tweet-row .tweet-body div.right-container div.media-row .media-photos-container.photo-count-1 .photo-box img {
+        max-height: 240px;
+        max-width: 100%;
+    }
+}
+
+
+/* tweet-body: media-row-video */
+
+div.row.tweet-row .tweet-body div.right-container div.media-row .video-box-container {
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+div.row.tweet-row .tweet-body div.right-container div.media-row .video-box,
+div.row.tweet-row .tweet-body div.right-container div.media-row .video-box .video-player,
+div.row.tweet-row .tweet-body div.right-container div.media-row .video-box video {
+    max-height: 500px;
+    max-width: 600px;
+    background-color: black;
+}
+
+div.row.tweet-row .tweet-body div.right-container div.media-row .video-box .video-control {
+    margin: 0;
+}
+
+div.row.tweet-row .tweet-body div.right-container div.media-row .video-box .video-views,
+div.row.tweet-row .tweet-body div.right-container div.media-row .video-box span {
+    font-family: TwitterChirp;
+    font-size: 15px;
+    line-height: 20px;
+    font-weight: 400;
+    color: white;
 }
 
 
@@ -414,4 +513,11 @@ div.row.tweet-row .tweet-body div.right-container div.footer-row span {
     line-height: 20px;
     min-width: calc(1em + 24px);
     padding: 0 12px;
+}
+
+
+/* 照片查看 */
+
+.viewer-backdrop {
+    background-color: rgb(0 0 0 / 70%);
 }
