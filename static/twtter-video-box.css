@@ -513,7 +513,7 @@
     z-index: 1;
     transition: all 0.3s ease;
     /* bug 修复 */
-    display: none;
+    display: none !important;
 }
 
 .video-reset {

@@ -3,6 +3,7 @@
     --font-black: rgb(15, 20, 25);
     --border-gray: #f0f3f4;
     --link-blue: rgb(29, 155, 240);
+    --tweet-link-line-gray: rgb(207, 217, 222);
     /* hover */
     --hover-blue: rgb(40, 144, 215);
     --hover-green: rgb(3, 183, 124);
@@ -197,7 +198,16 @@ div.row.profile-row span.label {
 
 div.row.tweet-row {
     padding: 12px 16px;
+    border-bottom: solid 1px var(--border-gray);
+}
+
+div.row.tweet-row:first-of-type {
     border-top: solid 1px var(--border-gray);
+}
+
+div.row.tweet-row:last-of-type,
+div.row.tweet-row[next-tweet-id^="tweet"] {
+    border-bottom: none;
 }
 
 div.row.tweet-row .flex-container {
@@ -207,6 +217,11 @@ div.row.tweet-row .flex-container {
 div.row.tweet-row div.left-container {
     width: 48px;
     margin-right: 12px;
+    flex: 0 0 48px;
+}
+
+div.row.tweet-row div.right-container {
+    width: calc(100% - 48px);
 }
 
 
@@ -239,9 +254,22 @@ div.row.tweet-row .tweet-header div.right-container span {
 
 /* tweet-body: avatar */
 
-div.row.tweet-row .tweet-body div.left-container .img-container {
+div.row.tweet-row .tweet-body div.left-container .image-container {
     width: 48px;
     height: 48px;
+}
+
+div.row.tweet-row .tweet-body div.left-container .tweet-link-line {
+    width: 2px;
+    height: calc(100% - 48px + 12px);
+    background-color: var(--tweet-link-line-gray);
+    margin: 0 23px;
+    position: relative;
+    top: 6px;
+}
+
+div.row.tweet-row[next-tweet-id="0"] .tweet-body div.left-container .tweet-link-line {
+    display: none;
 }
 
 div.row.tweet-row .tweet-body div.left-container img {
@@ -262,27 +290,24 @@ div.row.tweet-row .tweet-body div.right-container div.author-row .author-name {
     color: var(--font-black);
 }
 
-div.row.tweet-row .tweet-body div.right-container div.author-row .dot-span {
-    padding: 0 4px;
-}
-
 
 /* tweet-body: text-row */
 
 div.row.tweet-row .tweet-body div.right-container div.text-row {
     white-space: pre-line;
+    line-height: 20px;
+    color: var(--font-black);
+    margin-top: 2px;
 }
 
+div.row.tweet-row .tweet-body div.right-container div.text-row a,
 div.row.tweet-row .tweet-body div.right-container div.text-row span.at,
 div.row.tweet-row .tweet-body div.right-container div.text-row span.tag {
     display: inline;
     color: var(--link-blue);
     line-height: 20px;
     cursor: pointer;
-}
-
-div.row.tweet-row .tweet-body div.right-container div.text-row span.tag {
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 
@@ -298,16 +323,47 @@ div.row.tweet-row .tweet-body div.right-container div.media-row .media-photos-co
     display: flex;
     flex-wrap: wrap;
     overflow: hidden;
+    width: calc(100% - 40px);
 }
 
-div.row.tweet-row .tweet-body div.right-container div.media-row .media-photos-container img {
+div.row.tweet-row .tweet-body div.right-container div.media-row .media-photos-container .photo-box {
     width: 50%;
+    min-height: 300px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
 
 div.row.tweet-row .tweet-body div.right-container div.media-row .video-box-container {
     border-radius: 16px;
     border: 1px solid var(--border-gray);
     overflow: hidden;
+}
+
+div.row.tweet-row .tweet-body div.right-container div.media-row .media-photos-container.photo-count-0 {
+    display: none;
+}
+
+div.row.tweet-row .tweet-body div.right-container div.media-row .media-photos-container.photo-count-1 {
+    max-width: 600px;
+}
+
+div.row.tweet-row .tweet-body div.right-container div.media-row .media-photos-container.photo-count-1 .photo-box {
+    width: 100%;
+}
+
+div.row.tweet-row .tweet-body div.right-container div.media-row .media-photos-container.photo-count-3 {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+div.row.tweet-row .tweet-body div.right-container div.media-row .media-photos-container.photo-count-3 .photo-box {
+    width: 100%;
+    min-height: 250px;
+}
+
+div.row.tweet-row .tweet-body div.right-container div.media-row .media-photos-container.photo-count-3 .photo-box:first-of-type {
+    grid-area: 1 / 1 / span 2 / span 1;
 }
 
 

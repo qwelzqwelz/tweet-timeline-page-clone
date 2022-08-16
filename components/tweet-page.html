@@ -1,4 +1,4 @@
-<div class="row tweet-row">
+<div class="row tweet-row" next-tweet-id="{next_tweet_id}">
     {tweet_header_component}
     <!-- tweet-body -->
     <div class="flex-container tweet-body">
@@ -6,6 +6,7 @@
             <div class="image-container">
                 <img src="{profile_avatar_url}" alt="" />
             </div>
+            <div class="tweet-link-line"></div>
         </div>
         <div class="right-container">
             <div class="author-row">
@@ -14,12 +15,10 @@
                 <span class="dot-span">·</span>
                 <span class="created_at">{tweet_created_at}</span>
             </div>
-            <div class="text-row">
-                {tweet_rich_full_text}
-            </div>
+            <div class="text-row">{tweet_rich_full_text}</div>
             <div class="media-row">
                 <!-- 图像 -->
-                <div class="media-photos-container">
+                <div class="media-photos-container photo-count-{tweet_photo_count}">
                     {tweet_photos}
                 </div>
                 <!-- 视频 -->
