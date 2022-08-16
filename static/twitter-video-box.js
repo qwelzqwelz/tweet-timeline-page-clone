@@ -20,7 +20,7 @@ var jQueryPlugin = (window.jQueryPlugin = function(ident, func) {
     };
 });
 
-function twitterVideoPlayer($root) {
+window.twitterVideoPlayer = function($root) {
     const video = $root.first(".video-box");
     const video_element = $root.find("[data-video]");
     const video_preview = $root.find(".video-preview");
@@ -290,6 +290,8 @@ function twitterVideoPlayer($root) {
     $(vid).on("progress", function() {
         loading();
     });
-}
+};
 
 $.fn.twitterVideoPlayer = jQueryPlugin("twitterVideoPlayer", twitterVideoPlayer);
+// 视频播放器
+$(".video-box").twitterVideoPlayer();

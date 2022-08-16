@@ -20,10 +20,9 @@ const PHOTO_VIEWER_SETTINGS = {
     },
 };
 
-// 视频播放器
-$(".video-box").twitterVideoPlayer();
-
-// 图片浏览
-$(".media-photos-container").each(function() {
-    new Viewer(this, PHOTO_VIEWER_SETTINGS);
+$(function() {
+    // 图片浏览
+    $(".media-photos-container").each(function() {
+        new Viewer(this, PHOTO_VIEWER_SETTINGS);
+    });
 });
