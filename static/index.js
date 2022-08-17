@@ -59,12 +59,18 @@ class AutoLoadManager {
     }
 
     verify() {
+        const that = this;
+        // 本地文件禁用
+        this.finished = window.location.href.indexOf(`file://`) === 0;
+        //
         if (!this._is_touching_bottom() || this.fetch_lock || this.finished) {
             return null;
         }
-        const that = this;
+        // 加载动画
         this.loading_div.show();
+        // 上锁
         this.fetch_lock = true;
+        // 请求
         $.get(
                 window.location.href.replace(/\?.+$/, "").replace(/\.html$/, `/part-${that.max_part + 1}.html`),
                 function(data, status_code) {

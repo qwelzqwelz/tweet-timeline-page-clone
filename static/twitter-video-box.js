@@ -48,10 +48,12 @@ window.twitterVideoPlayer = function($root) {
     const video_reset = $root.find(".video-reset");
     const video_reset_btn = $root.find(".video-reset-btn");
     const video_contextMenu = $root.find(".video-contextMenu");
+    const video_rotate_button = $root.find(".video-rotate-container");
 
     let vid = $(video_element).get(0),
         auto_loop = video.hasClass("auto-loop"),
-        init_click = false;
+        init_click = false,
+        rotated = false;
 
     function play() {
         vid.play();
@@ -63,6 +65,15 @@ window.twitterVideoPlayer = function($root) {
         vid.pause();
         video_control_pause.hide();
         video_control_play.show();
+    }
+
+    function rotate90() {
+        if (rotated) {
+            video.removeClass("rotated");
+        } else {
+            video.addClass("rotated");
+        }
+        rotated = !rotated;
     }
 
     function loading() {
@@ -187,11 +198,13 @@ window.twitterVideoPlayer = function($root) {
     }
 
     video_start_btn.click(function() {
+        init_click = true;
         $(video_preview).hide();
         play();
     });
 
     video_control_btn.click(function() {
+        console.log("video_control_btn", vid.paused);
         if (vid.paused) {
             play();
         } else {
@@ -199,6 +212,7 @@ window.twitterVideoPlayer = function($root) {
         }
         return false;
     });
+
     video_top.click(function() {
         init_click = true;
         if (vid.paused) {
@@ -208,6 +222,7 @@ window.twitterVideoPlayer = function($root) {
         }
         return false;
     });
+
     video_voice_btn.click(function() {
         if (vid.muted === false) {
             voiceOn();
@@ -215,14 +230,17 @@ window.twitterVideoPlayer = function($root) {
             voiceOff();
         }
     });
+
     full_screen_btn.click(function() {
         if (IsFullScreen()) exitFullscreen();
         else Fullscreen(video[0]);
     });
+
     video_top.dblclick(function() {
         if (IsFullScreen()) exitFullscreen();
         else Fullscreen(video[0]);
     });
+
     video_voice_slider.on("input change", function() {
         var range = (localStorage[this.id] = $(this).val());
         video_voice_buffer.css("width", range * 100 + "%");
@@ -234,11 +252,13 @@ window.twitterVideoPlayer = function($root) {
             voiceOff();
         }
     });
+
     video_voice_slider.each(function() {
         if (typeof localStorage[this.id] !== "undefined") {
             $(this).val(localStorage[this.id]);
         }
     });
+
     video_voice_slider
         .keyup(function() {
             var range = (localStorage[this.id] = $(this).val());
@@ -252,17 +272,22 @@ window.twitterVideoPlayer = function($root) {
             }
         })
         .keyup();
+
     video_slider.click(function() {
         skip();
     });
+
     updateplayer();
     video_count_fulltime.text(getFormatedFullTime());
+
     $(vid).on("timeupdate", function() {
         updateplayer();
     });
+
     $(video_slider_buffer).on("input change", function() {
         updateplayer();
     });
+
     video_voice.hover(
         function() {
             video_slider.hide();
@@ -271,6 +296,7 @@ window.twitterVideoPlayer = function($root) {
             video_slider.show();
         }
     );
+
     $(vid).on("ended", function() {
         if (auto_loop) {
             play();
@@ -278,10 +304,12 @@ window.twitterVideoPlayer = function($root) {
             video_reset.css("display", "flex");
         }
     });
+
     video_reset_btn.click(function() {
         play();
         video_reset.css("display", "none");
     });
+
     $(video).on("contextmenu", function(event) {
         event.preventDefault();
         video_contextMenu.show().css({
@@ -289,14 +317,16 @@ window.twitterVideoPlayer = function($root) {
             left: event.pageX,
         });
     });
+
     $(window).click(function() {
         video_contextMenu.fadeOut("fast");
     });
+
     $(vid).on("progress", function() {
         loading();
     });
+
+    video_rotate_button.click(rotate90);
 };
 
 $.fn.twitterVideoPlayer = jQueryPlugin("twitterVideoPlayer", twitterVideoPlayer);
-// 视频播放器
-$(".video-box").twitterVideoPlayer();
