@@ -50,7 +50,8 @@ window.twitterVideoPlayer = function($root) {
     const video_contextMenu = $root.find(".video-contextMenu");
 
     let vid = $(video_element).get(0),
-        auto_loop = video.hasClass("auto-loop");
+        auto_loop = video.hasClass("auto-loop"),
+        init_click = false;
 
     function play() {
         vid.play();
@@ -65,6 +66,9 @@ window.twitterVideoPlayer = function($root) {
     }
 
     function loading() {
+        if (!init_click) {
+            return null;
+        }
         if (vid.readyState === 4) {
             video_loading.hide();
             play();
@@ -196,6 +200,7 @@ window.twitterVideoPlayer = function($root) {
         return false;
     });
     video_top.click(function() {
+        init_click = true;
         if (vid.paused) {
             play();
         } else {

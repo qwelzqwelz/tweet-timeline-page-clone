@@ -520,6 +520,60 @@ div.row.tweet-row .tweet-body div.right-container div.footer-row span {
 }
 
 
+/* row: loading */
+
+@-webkit-keyframes rotation {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+div.row.loading-row {
+    margin: 32px auto;
+    display: none;
+}
+
+div.row.loading-row .loading-svg-container {
+    margin: 0 auto;
+    width: 32px;
+    height: 32px;
+}
+
+div.row.loading-row svg {
+    width: 32px;
+    height: 32px;
+    -webkit-transform: rotate(360deg);
+    animation: rotation 1s linear infinite;
+    -moz-animation: rotation 1s linear infinite;
+    -webkit-animation: rotation 1s linear infinite;
+    -o-animation: rotation 1s linear infinite;
+}
+
+
+/* row: no-more-top */
+
+div.row.no-more-tip-row {
+    border: none;
+    position: relative;
+    top: 48px;
+    display: none;
+}
+
+div.row.no-more-tip-row .tip-container {
+    width: fit-content;
+    margin: 0 auto;
+}
+
+div.row.no-more-tip-row .tip-container span {
+    font-size: 12px;
+    line-height: 12px;
+    opacity: 0.5;
+}
+
+
 /* 照片查看 */
 
 .viewer-backdrop {
