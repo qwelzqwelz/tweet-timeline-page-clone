@@ -20,6 +20,17 @@ const PHOTO_VIEWER_SETTINGS = {
     },
 };
 
+function reset_vote_status(elem) {
+    if (elem.attr("reset-finished")) {
+        return null;
+    }
+    const deadline = parseFloat(elem.attr("data-deadline")) * 1000;
+    elem.text(
+        deadline <= Date.now() ? "Final results" : `Unfinished until ${elem.attr("data-deadline-dt").split(" ")[0]}`
+    );
+    elem.attr("reset-finished", 1);
+}
+
 function media_init(box) {
     // 视频播放器
     box.find(".video-box").twitterVideoPlayer();
@@ -88,4 +99,10 @@ class AutoLoadManager {
 $(function() {
     media_init($(document));
     new AutoLoadManager().run();
+
+    setInterval(() => {
+        $(".is-vote-finished").each(function() {
+            reset_vote_status($(this));
+        });
+    }, 500);
 });

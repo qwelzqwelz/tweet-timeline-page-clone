@@ -8,6 +8,9 @@
     --hover-blue: rgb(40, 144, 215);
     --hover-green: rgb(3, 183, 124);
     --hover-red: rgb(221, 37, 126);
+    /* card */
+    --card-blue-background: rgba(29, 155, 240, 0.58);
+    --card-gray-background: rgb(207, 217, 222);
 }
 
 @font-face {
@@ -357,7 +360,71 @@ div.row.tweet-row .tweet-body div.right-container div.text-row {
     margin-top: 2px;
 }
 
-div.row.tweet-row .tweet-body div.right-container div.text-row a,
+
+/* tweet-body: card-row */
+
+div.row.tweet-row .tweet-body div.right-container div.card-row {
+    margin-top: 12px;
+    width: calc(100% - 40px);
+    max-width: 500px;
+}
+
+div.row.tweet-row .tweet-body div.right-container div.card-row span {
+    line-height: 20px;
+    color: var(--font-black);
+    font-weight: 400;
+}
+
+div.row.tweet-row .tweet-body div.right-container div.card-row .card-footer span {
+    color: var(--font-gray);
+}
+
+div.row.tweet-row .tweet-body div.right-container div.card-row .card-li[sort-index="0"] span {
+    font-weight: 700;
+}
+
+div.row.tweet-row .tweet-body div.right-container div.card-row .card-li {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    height: 32px;
+    width: 100%;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+div.row.tweet-row .tweet-body div.right-container div.card-row .card-li:nth-of-type(1n + 2) {
+    margin-top: 4px;
+}
+
+div.row.tweet-row .tweet-body div.right-container div.card-row .card-li>* {
+    width: fit-content;
+}
+
+div.row.tweet-row .tweet-body div.right-container div.card-row .card-li .card-li-background {
+    height: 32px;
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: var(--card-gray-background);
+    border-radius: 4px;
+}
+
+div.row.tweet-row .tweet-body div.right-container div.card-row .card-li .card-li-label {
+    padding: 0 12px;
+}
+
+div.row.tweet-row .tweet-body div.right-container div.card-row .card-li[sort-index="0"] .card-li-background {
+    background-color: var(--card-blue-background);
+}
+
+div.row.tweet-row .tweet-body div.right-container div.card-row .card-footer {
+    margin-top: 12px;
+}
+
 
 /* tweet-body: media-row-photo */
 
