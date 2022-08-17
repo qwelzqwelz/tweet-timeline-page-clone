@@ -94,6 +94,23 @@ span,
     color: var(--font-gray);
 }
 
+a,
+span.tag {
+    display: inline;
+    font-family: TwitterChirp;
+    color: var(--link-blue);
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 20px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+span.tag:hover,
+a:hover {
+    text-decoration: underline;
+}
+
 
 /* banner */
 
@@ -211,6 +228,7 @@ div.row.profile-row div.location-and-join-date svg {
     fill: var(--font-gray);
 }
 
+div.row.profile-row div.location-and-join-date a,
 div.row.profile-row div.location-and-join-date span {
     margin-right: 12px;
 }
@@ -340,22 +358,6 @@ div.row.tweet-row .tweet-body div.right-container div.text-row {
 }
 
 div.row.tweet-row .tweet-body div.right-container div.text-row a,
-div.row.tweet-row .tweet-body div.right-container div.text-row span.at,
-div.row.tweet-row .tweet-body div.right-container div.text-row span.tag {
-    display: inline;
-    color: var(--link-blue);
-    line-height: 20px;
-    cursor: pointer;
-    text-decoration: none;
-}
-
-div.row.tweet-row .tweet-body div.right-container div.text-row span.at:hover,
-div.row.tweet-row .tweet-body div.right-container div.text-row span.tag:hover,
-div.row.tweet-row .tweet-body div.right-container div.text-row a:hover {
-    text-decoration: underline;
-}
-
-div.row.tweet-row .tweet-body div.right-container div.text-row a,
 
 /* tweet-body: media-row-photo */
 
@@ -443,11 +445,6 @@ div.row.tweet-row .tweet-body div.right-container div.media-row .media-photos-co
 
 /* tweet-body: media-row-video */
 
-div.row.tweet-row .tweet-body div.right-container div.media-row .video-box-container {
-    border-radius: 16px;
-    overflow: hidden;
-}
-
 div.row.tweet-row .tweet-body div.right-container div.media-row .video-box,
 div.row.tweet-row .tweet-body div.right-container div.media-row .video-box .video-player,
 div.row.tweet-row .tweet-body div.right-container div.media-row .video-box video {
@@ -467,6 +464,29 @@ div.row.tweet-row .tweet-body div.right-container div.media-row .video-box span 
     line-height: 20px;
     font-weight: 400;
     color: white;
+}
+
+div.row.tweet-row .tweet-body div.right-container div.media-row .video-from-footer {
+    margin-top: 4px;
+    border: none;
+}
+
+div.row.tweet-row .tweet-body div.right-container div.media-row .video-from-footer[data-href="0"] {
+    display: none;
+}
+
+div.row.tweet-row .tweet-body div.right-container div.media-row .video-from-footer>* {
+    font-size: 13px;
+    line-height: 16px;
+}
+
+div.row.tweet-row .tweet-body div.right-container div.media-row .video-from-footer a {
+    color: var(--font-black);
+    font-weight: 700;
+}
+
+div.row.tweet-row .tweet-body div.right-container div.media-row .video-from-footer a:hover {
+    text-decoration: underline var(--link-blue) 1px;
 }
 
 
