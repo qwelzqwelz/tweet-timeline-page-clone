@@ -83,7 +83,7 @@ body {
     body,
     #root,
     #root>* {
-        width: 100%;
+        width: calc(100% - 1px);
         margin: 0;
     }
 }
@@ -459,6 +459,7 @@ div.row.tweet-row .tweet-body div.right-container div.media-row .media-photos-co
 div.row.tweet-row .tweet-body div.right-container div.media-row .media-photos-container .photo-box {
     width: 50%;
     min-height: 300px;
+    max-height: 500px;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -501,25 +502,30 @@ div.row.tweet-row .tweet-body div.right-container div.media-row .media-photos-co
 div.row.tweet-row .tweet-body div.right-container div.media-row .media-photos-container.photo-count-3 .photo-box {
     width: 100%;
     min-height: 250px;
+    max-height: 500px;
 }
 
 div.row.tweet-row .tweet-body div.right-container div.media-row .media-photos-container.photo-count-3 .photo-box:first-of-type {
     grid-area: 1 / 1 / span 2 / span 1;
+    min-height: 500px;
+    max-height: 1000px;
 }
 
 @media screen and (max-width: 768px) {
     div.row.tweet-row .tweet-body div.right-container div.media-row .media-photos-container .photo-box {
         min-height: 180px;
+        max-width: 360px;
     }
     div.row.tweet-row .tweet-body div.right-container div.media-row .media-photos-container.photo-count-3 .photo-box {
         min-height: 150px;
+        max-height: 300px;
     }
     div.row.tweet-row .tweet-body div.right-container div.media-row .media-photos-container.photo-count-1 {
         max-width: calc(100% - 50px);
     }
     div.row.tweet-row .tweet-body div.right-container div.media-row .media-photos-container.photo-count-1 .photo-box,
     div.row.tweet-row .tweet-body div.right-container div.media-row .media-photos-container.photo-count-1 .photo-box img {
-        max-height: 240px;
+        max-height: 400px;
         max-width: 100%;
     }
 }
