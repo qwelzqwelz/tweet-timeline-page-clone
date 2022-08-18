@@ -71,9 +71,12 @@
     overflow: hidden;
 }
 
+
+/* 单击|双击 控制生效区域 */
+
 .video-top {
     position: absolute;
-    height: 90%;
+    height: calc(100% - 90px);
     width: 100%;
     top: 0;
     right: 0;
@@ -575,7 +578,7 @@
     transition: all 0.1s ease;
 }
 
-.video-rotate-container {
+.video-box .video-rotate-container {
     width: 48px;
     height: 48px;
     margin: 0;
@@ -584,6 +587,11 @@
     top: calc(50% - 24px);
     cursor: pointer;
     z-index: 5;
+    display: none;
+}
+
+.video-box.full-screen .video-rotate-container {
+    display: block;
 }
 
 .video-rotate-container button {
@@ -600,6 +608,42 @@
     cursor: pointer;
 }
 
+
+/* 旋转 */
+
 .video-box.rotated {
     transform: rotate(90deg);
+}
+
+
+/* 全屏 */
+
+#body-full-screen-container {
+    background-color: black;
+    position: absolute;
+    display: none;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.video-box.full-screen.rotated {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%) rotate(90deg);
+    /* JS 指定 */
+    width: 1080px;
+    height: 800px;
+}
+
+.video-box.full-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }

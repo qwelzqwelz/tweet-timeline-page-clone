@@ -50,10 +50,13 @@ window.twitterVideoPlayer = function($root) {
     const video_contextMenu = $root.find(".video-contextMenu");
     const video_rotate_button = $root.find(".video-rotate-container");
 
-    let vid = $(video_element).get(0),
-        auto_loop = video.hasClass("auto-loop"),
+    const vid = $(video_element).get(0),
+        body_elem = $("body").get(0),
+        fullscreen_container = $("#body-full-screen-container");
+
+    let auto_loop = video.hasClass("auto-loop"),
         init_click = false,
-        rotated = false;
+        raw_container = null;
 
     function play() {
         vid.play();
@@ -67,27 +70,17 @@ window.twitterVideoPlayer = function($root) {
         video_control_play.show();
     }
 
-    function rotate90() {
-        if (rotated) {
+    function rotate90({ force_back = false }) {
+        if (video.hasClass("rotated") || force_back) {
             video.removeClass("rotated");
+            video.css("height", "unset").css("width", "unset");
         } else {
             video.addClass("rotated");
+            video.css("height", fullscreen_container.width()).css("width", fullscreen_container.height());
         }
-        rotated = !rotated;
     }
 
-    function loading() {
-        if (!init_click) {
-            return null;
-        }
-        if (vid.readyState === 4) {
-            video_loading.hide();
-            play();
-        } else {
-            video_loading.show();
-            pause();
-        }
-    }
+    function loading() {}
 
     function voiceOn() {
         vid.muted = true;
@@ -101,25 +94,22 @@ window.twitterVideoPlayer = function($root) {
         $(video_voice_off).hide();
     }
 
-    function Fullscreen(element) {
+    // 全屏: 基础函数
+    function _request_fullscreen(element) {
         if (element.requestFullscreen) element.requestFullscreen();
         else if (element.mozRequestFullScreen) element.mozRequestFullScreen();
         else if (element.webkitRequestFullscreen) element.webkitRequestFullscreen();
         else if (element.msRequestFullscreen) element.msRequestFullscreen();
-        full_screen_open.hide();
-        full_screen_exit.show();
     }
 
-    function exitFullscreen() {
+    function _exit_fullscreen() {
         if (document.exitFullscreen) document.exitFullscreen();
         else if (document.mozCancelFullScreen) document.mozCancelFullScreen();
         else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
         else if (document.msExitFullscreen) document.msExitFullscreen();
-        full_screen_open.show();
-        full_screen_exit.hide();
     }
 
-    function IsFullScreen() {
+    function _is_fullScreen() {
         var full_screen_element =
             document.fullscreenElement ||
             document.webkitFullscreenElement ||
@@ -129,6 +119,40 @@ window.twitterVideoPlayer = function($root) {
 
         if (full_screen_element === null) return false;
         else return true;
+    }
+
+    // 全屏: 进一步封装
+    function set_video_fullscreen() {
+        // 全屏容器
+        _request_fullscreen(body_elem);
+        raw_container = video.parent();
+        fullscreen_container.show().append(video);
+        // video-box
+        video.addClass("full-screen");
+        // 按钮
+        full_screen_open.hide();
+        full_screen_exit.show();
+    }
+
+    function cancel_video_fullscreen() {
+        // 容器
+        _exit_fullscreen();
+        fullscreen_container.hide();
+        raw_container.prepend(video);
+        // video-box
+        rotate90({ force_back: true });
+        video.removeClass("full-screen");
+        // 按钮
+        full_screen_open.show();
+        full_screen_exit.hide();
+    }
+
+    function toggle_video_fullscreen() {
+        if (_is_fullScreen()) {
+            cancel_video_fullscreen();
+        } else {
+            set_video_fullscreen();
+        }
     }
 
     function updateplayer() {
@@ -159,9 +183,13 @@ window.twitterVideoPlayer = function($root) {
         return currentMinutes + ":" + currentSeconeds;
     }
 
-    function skip() {
-        var mouseX = event.pageX - video_slider.offset().left,
+    function skip(event) {
+        let mouseX = event.pageX - video_slider.offset().left,
             width = video_slider.outerWidth();
+        // 旋转模式
+        if (video.hasClass("rotated")) {
+            mouseX = event.pageY - video_slider.offset().top;
+        }
         vid.currentTime = (mouseX / width) * vid.duration;
         updateplayer();
     }
@@ -204,7 +232,6 @@ window.twitterVideoPlayer = function($root) {
     });
 
     video_control_btn.click(function() {
-        console.log("video_control_btn", vid.paused);
         if (vid.paused) {
             play();
         } else {
@@ -232,13 +259,11 @@ window.twitterVideoPlayer = function($root) {
     });
 
     full_screen_btn.click(function() {
-        if (IsFullScreen()) exitFullscreen();
-        else Fullscreen(video[0]);
+        toggle_video_fullscreen();
     });
 
     video_top.dblclick(function() {
-        if (IsFullScreen()) exitFullscreen();
-        else Fullscreen(video[0]);
+        toggle_video_fullscreen();
     });
 
     video_voice_slider.on("input change", function() {
@@ -273,8 +298,8 @@ window.twitterVideoPlayer = function($root) {
         })
         .keyup();
 
-    video_slider.click(function() {
-        skip();
+    video_slider.click(function(event) {
+        skip(event);
     });
 
     updateplayer();
