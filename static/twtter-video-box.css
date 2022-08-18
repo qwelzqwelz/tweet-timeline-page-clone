@@ -76,7 +76,7 @@
 
 .video-top {
     position: absolute;
-    height: calc(100% - 90px);
+    height: calc(80% - 90px);
     width: 100%;
     top: 0;
     right: 0;

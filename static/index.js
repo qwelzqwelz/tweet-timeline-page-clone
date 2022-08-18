@@ -59,9 +59,13 @@ class AutoLoadManager {
     }
 
     verify() {
+        // 全屏模式，停止动态加载
+        if (_is_fullscreen()) {
+            return null;
+        }
         const that = this;
         // 本地文件禁用
-        this.finished = window.location.href.indexOf(`file://`) === 0;
+        this.finished = this.finished || window.location.href.indexOf(`file://`) === 0;
         //
         if (!this._is_touching_bottom() || this.fetch_lock || this.finished) {
             return null;

@@ -20,6 +20,31 @@ var jQueryPlugin = (window.jQueryPlugin = function(ident, func) {
     };
 });
 
+// 全屏: 基础函数
+function _request_fullscreen(element) {
+    if (element.requestFullscreen) element.requestFullscreen();
+    else if (element.mozRequestFullScreen) element.mozRequestFullScreen();
+    else if (element.webkitRequestFullscreen) element.webkitRequestFullscreen();
+    else if (element.msRequestFullscreen) element.msRequestFullscreen();
+}
+
+function _exit_fullscreen() {
+    if (document.exitFullscreen) document.exitFullscreen();
+    else if (document.mozCancelFullScreen) document.mozCancelFullScreen();
+    else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+    else if (document.msExitFullscreen) document.msExitFullscreen();
+}
+
+function _is_fullscreen() {
+    return (
+        document.fullscreenElement ||
+        document.webkitFullscreenElement ||
+        document.mozFullScreenElement ||
+        document.msFullscreenElement ||
+        null
+    );
+}
+
 window.twitterVideoPlayer = function($root) {
     const video = $root.first(".video-box");
     const video_element = $root.find("[data-video]");
@@ -55,8 +80,8 @@ window.twitterVideoPlayer = function($root) {
         fullscreen_container = $("#body-full-screen-container");
 
     let auto_loop = video.hasClass("auto-loop"),
-        init_click = false,
-        raw_container = null;
+        raw_container = null,
+        last_scroll_top = 0;
 
     function play() {
         vid.play();
@@ -94,35 +119,10 @@ window.twitterVideoPlayer = function($root) {
         $(video_voice_off).hide();
     }
 
-    // 全屏: 基础函数
-    function _request_fullscreen(element) {
-        if (element.requestFullscreen) element.requestFullscreen();
-        else if (element.mozRequestFullScreen) element.mozRequestFullScreen();
-        else if (element.webkitRequestFullscreen) element.webkitRequestFullscreen();
-        else if (element.msRequestFullscreen) element.msRequestFullscreen();
-    }
-
-    function _exit_fullscreen() {
-        if (document.exitFullscreen) document.exitFullscreen();
-        else if (document.mozCancelFullScreen) document.mozCancelFullScreen();
-        else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-        else if (document.msExitFullscreen) document.msExitFullscreen();
-    }
-
-    function _is_fullScreen() {
-        var full_screen_element =
-            document.fullscreenElement ||
-            document.webkitFullscreenElement ||
-            document.mozFullScreenElement ||
-            document.msFullscreenElement ||
-            null;
-
-        if (full_screen_element === null) return false;
-        else return true;
-    }
-
     // 全屏: 进一步封装
     function set_video_fullscreen() {
+        // 记录当前滚动距离
+        last_scroll_top = $(window).scrollTop();
         // 全屏容器
         _request_fullscreen(body_elem);
         raw_container = video.parent();
@@ -134,9 +134,11 @@ window.twitterVideoPlayer = function($root) {
         full_screen_exit.show();
     }
 
-    function cancel_video_fullscreen() {
+    function cancel_video_fullscreen_event() {
+        if (!fullscreen_container.find(".video-box").eq(0).is(video)) {
+            return null;
+        }
         // 容器
-        _exit_fullscreen();
         fullscreen_container.hide();
         raw_container.prepend(video);
         // video-box
@@ -145,11 +147,21 @@ window.twitterVideoPlayer = function($root) {
         // 按钮
         full_screen_open.show();
         full_screen_exit.hide();
+        // 返回全屏前滚动到的位置
+        setTimeout(() => {
+            $(window).scrollTop(last_scroll_top);
+        }, 500);
     }
 
+    document.addEventListener("fullscreenchange", function(event) {
+        if (!_is_fullscreen()) {
+            cancel_video_fullscreen_event();
+        }
+    });
+
     function toggle_video_fullscreen() {
-        if (_is_fullScreen()) {
-            cancel_video_fullscreen();
+        if (_is_fullscreen()) {
+            _exit_fullscreen();
         } else {
             set_video_fullscreen();
         }
@@ -226,7 +238,6 @@ window.twitterVideoPlayer = function($root) {
     }
 
     video_start_btn.click(function() {
-        init_click = true;
         $(video_preview).hide();
         play();
     });
@@ -241,7 +252,6 @@ window.twitterVideoPlayer = function($root) {
     });
 
     video_top.click(function() {
-        init_click = true;
         if (vid.paused) {
             play();
         } else {
