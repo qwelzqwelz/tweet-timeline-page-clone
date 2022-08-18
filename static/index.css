@@ -369,6 +369,12 @@ div.row.tweet-row .tweet-body div.right-container div.card-row {
     max-width: 500px;
 }
 
+@media screen and (max-width: 768px) {
+    div.row.tweet-row .tweet-body div.right-container div.card-row {
+        width: 100%;
+    }
+}
+
 div.row.tweet-row .tweet-body div.right-container div.card-row span {
     line-height: 20px;
     color: var(--font-black);
@@ -388,7 +394,7 @@ div.row.tweet-row .tweet-body div.right-container div.card-row .card-li {
     flex-wrap: nowrap;
     align-items: center;
     justify-content: space-between;
-    height: 32px;
+    min-height: 32px;
     width: 100%;
     position: relative;
     top: 0;
@@ -404,7 +410,8 @@ div.row.tweet-row .tweet-body div.right-container div.card-row .card-li>* {
 }
 
 div.row.tweet-row .tweet-body div.right-container div.card-row .card-li .card-li-background {
-    height: 32px;
+    min-height: 32px;
+    height: 100%;
     z-index: -1;
     position: absolute;
     top: 0;

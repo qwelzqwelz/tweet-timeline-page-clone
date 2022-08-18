@@ -231,7 +231,7 @@
     transform: rotate(-90deg);
     position: absolute;
     bottom: 80px;
-    z-index: 9999;
+    z-index: 20;
     background: #0000002e;
     padding: 13px;
     border-radius: 9999px;
@@ -628,6 +628,7 @@
     bottom: 0;
     height: 100%;
     width: 100%;
+    z-index: 100;
 }
 
 .video-box.full-screen.rotated {
@@ -646,4 +647,32 @@
     left: 0;
     right: 0;
     bottom: 0;
+}
+
+.video-box.full-screen .video-top {
+    z-index: 101;
+}
+
+.video-box.full-screen .video-player-controls {
+    z-index: 101;
+}
+
+.video-box.full-screen .video-voice-slider {
+    z-index: 120;
+}
+
+.video-box.full-screen .video-voice-slider-range {
+    z-index: 115;
+}
+
+.video-box.full-screen .video-reset {
+    z-index: 101;
+}
+
+.video-box.full-screen .video-contextMenu {
+    z-index: 104;
+}
+
+.video-box.full-screen .video-rotate-container {
+    z-index: 105;
 }
