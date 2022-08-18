@@ -341,13 +341,21 @@ div.row.tweet-row .tweet-body div.left-container img {
 
 /* tweet-body: author-row */
 
-div.row.tweet-row .tweet-body div.right-container div.author-row>span {
+div.row.tweet-row .tweet-body div.right-container div.author-row>* {
     line-height: 20px;
 }
 
 div.row.tweet-row .tweet-body div.right-container div.author-row .author-name {
     font-weight: 700;
     color: var(--font-black);
+}
+
+div.row.tweet-row .tweet-body div.right-container div.author-row .author-screen-name {
+    color: var(--font-gray);
+}
+
+div.row.tweet-row .tweet-body div.right-container div.author-row .author-screen-name:hover {
+    text-decoration: var(--link-blue) underline 1px;
 }
 
 
