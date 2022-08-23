@@ -512,6 +512,10 @@ div.row.tweet-row .tweet-card-box .tweet-card-author-row>span {
     margin-right: 4px;
 }
 
+div.row.tweet-row .tweet-card-box .tweet-card-author-row>span.verified-container {
+    display: none;
+}
+
 div.row.tweet-row .tweet-card-box .tweet-card-author-row .author-avatar {
     width: 20px;
     height: 20px;
