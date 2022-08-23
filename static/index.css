@@ -350,6 +350,25 @@ div.row.tweet-row .tweet-body div.right-container div.author-row .author-name {
     color: var(--font-black);
 }
 
+div.row.tweet-row .tweet-body div.right-container div.author-row .verified-container {
+    width: 1.25em;
+    height: 1.25em;
+    display: none;
+}
+
+div.row.tweet-row .tweet-body div.right-container div.author-row .verified-container.verified {
+    display: inline;
+}
+
+div.row.tweet-row .tweet-body div.right-container div.author-row .verified-container svg {
+    width: 1.25em;
+    height: 1.25em;
+    line-height: 12px;
+    vertical-align: text-bottom;
+    position: relative;
+    fill: var(--link-blue);
+}
+
 div.row.tweet-row .tweet-body div.right-container div.author-row .author-screen-name {
     color: var(--font-gray);
 }
