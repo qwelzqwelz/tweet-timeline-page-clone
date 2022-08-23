@@ -8,9 +8,9 @@
     --hover-blue: rgb(40, 144, 215);
     --hover-green: rgb(3, 183, 124);
     --hover-red: rgb(221, 37, 126);
-    /* card */
-    --card-blue-background: rgba(29, 155, 240, 0.58);
-    --card-gray-background: rgb(207, 217, 222);
+    /* poll */
+    --poll-blue-background: rgba(29, 155, 240, 0.58);
+    --poll-gray-background: rgb(207, 217, 222);
 }
 
 @font-face {
@@ -371,33 +371,115 @@ div.row.tweet-row .tweet-body div.right-container div.text-row {
 
 /* tweet-body: card-row */
 
-div.row.tweet-row .tweet-body div.right-container div.card-row {
+div.row.tweet-row .card-row .card-box {
+    border-radius: 16px;
+    border: 1px solid var(--tweet-link-line-gray);
+    overflow: hidden;
+    display: flex;
+    flex-wrap: nowrap;
+    height: 130px;
+    width: 550px;
+    margin-top: 12px;
+    text-decoration: unset;
+}
+
+div.row.tweet-row .card-row .card-box-left {
+    flex: 0 0 130px;
+    width: 130px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+div.row.tweet-row .card-row .card-box-left img {
+    width: 130px;
+    height: 130px;
+    opacity: 0;
+}
+
+div.row.tweet-row .card-row .card-box-right .card-text-container {
+    margin: 0;
+    padding: 12px;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    flex-wrap: nowrap;
+    gap: 2px;
+}
+
+div.row.tweet-row .card-row .card-box-right .card-text-container span {
+    font-size: 15px;
+    line-height: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    max-height: 20px;
+    /* webkit */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+}
+
+div.row.tweet-row .card-row .card-box-right .card-text-container span.card-title {
+    color: var(--font-black);
+    width: fit-content;
+    position: relative;
+}
+
+div.row.tweet-row .card-row .card-box:hover .card-text-container span.card-title::after {
+    width: 100%;
+    height: 1px;
+    content: "";
+    position: absolute;
+    bottom: 3px;
+    left: 0;
+    display: inline-block;
+    background-color: rgb(29, 155, 240);
+}
+
+div.row.tweet-row .card-row .card-box-right .card-text-container span.card-description {
+    max-height: 40px;
+    -webkit-line-clamp: 2;
+}
+
+div.row.tweet-row .card-row .card-box:hover span.card-title {
+    text-decoration: solid 1px var(--link-blue);
+}
+
+
+/* tweet-body: poll-row */
+
+div.row.tweet-row .tweet-body div.right-container div.poll-row {
     margin-top: 12px;
     width: calc(100% - 40px);
     max-width: 500px;
 }
 
 @media screen and (max-width: 768px) {
-    div.row.tweet-row .tweet-body div.right-container div.card-row {
+    div.row.tweet-row .tweet-body div.right-container div.poll-row {
         width: 100%;
     }
 }
 
-div.row.tweet-row .tweet-body div.right-container div.card-row span {
+div.row.tweet-row .tweet-body div.right-container div.poll-row span {
     line-height: 20px;
     color: var(--font-black);
     font-weight: 400;
 }
 
-div.row.tweet-row .tweet-body div.right-container div.card-row .card-footer span {
+div.row.tweet-row .tweet-body div.right-container div.poll-row .poll-footer span {
     color: var(--font-gray);
 }
 
-div.row.tweet-row .tweet-body div.right-container div.card-row .card-li[sort-index="0"] span {
+div.row.tweet-row .tweet-body div.right-container div.poll-row .poll-li[sort-index="0"] span {
     font-weight: 700;
 }
 
-div.row.tweet-row .tweet-body div.right-container div.card-row .card-li {
+div.row.tweet-row .tweet-body div.right-container div.poll-row .poll-li {
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
@@ -409,34 +491,34 @@ div.row.tweet-row .tweet-body div.right-container div.card-row .card-li {
     left: 0;
 }
 
-div.row.tweet-row .tweet-body div.right-container div.card-row .card-li:nth-of-type(1n + 2) {
+div.row.tweet-row .tweet-body div.right-container div.poll-row .poll-li:nth-of-type(1n + 2) {
     margin-top: 4px;
 }
 
-div.row.tweet-row .tweet-body div.right-container div.card-row .card-li>* {
+div.row.tweet-row .tweet-body div.right-container div.poll-row .poll-li>* {
     width: fit-content;
 }
 
-div.row.tweet-row .tweet-body div.right-container div.card-row .card-li .card-li-background {
+div.row.tweet-row .tweet-body div.right-container div.poll-row .poll-li .poll-li-background {
     min-height: 32px;
     height: 100%;
     z-index: -1;
     position: absolute;
     top: 0;
     left: 0;
-    background-color: var(--card-gray-background);
+    background-color: var(--poll-gray-background);
     border-radius: 4px;
 }
 
-div.row.tweet-row .tweet-body div.right-container div.card-row .card-li .card-li-label {
+div.row.tweet-row .tweet-body div.right-container div.poll-row .poll-li .poll-li-label {
     padding: 0 12px;
 }
 
-div.row.tweet-row .tweet-body div.right-container div.card-row .card-li[sort-index="0"] .card-li-background {
-    background-color: var(--card-blue-background);
+div.row.tweet-row .tweet-body div.right-container div.poll-row .poll-li[sort-index="0"] .poll-li-background {
+    background-color: var(--poll-blue-background);
 }
 
-div.row.tweet-row .tweet-body div.right-container div.card-row .card-footer {
+div.row.tweet-row .tweet-body div.right-container div.poll-row .poll-footer {
     margin-top: 12px;
 }
 

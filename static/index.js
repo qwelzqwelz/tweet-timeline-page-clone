@@ -20,14 +20,30 @@ const PHOTO_VIEWER_SETTINGS = {
     },
 };
 
+const TIME_SUFFIX = [
+    [1, "seconds"],
+    [60, "minutes"],
+    [60, "hours"],
+    [24, "days"],
+];
+
 function reset_vote_status(elem) {
     if (elem.attr("reset-finished")) {
         return null;
     }
-    const deadline = parseFloat(elem.attr("data-deadline")) * 1000;
-    elem.text(
-        deadline <= Date.now() ? "Final results" : `Unfinished until ${elem.attr("data-deadline-dt").split(" ")[0]}`
-    );
+    let left_time = Math.floor(parseFloat(elem.attr("data-deadline")) - Date.now() / 1000),
+        result = "Final results";
+    //
+    TIME_SUFFIX.forEach((pair) => {
+        const [t_base, t_name] = pair;
+        left_time = Math.floor(left_time / t_base);
+        if (left_time <= 0) {
+            return null;
+        }
+        result = `${left_time} ${t_name} left`;
+    });
+
+    elem.text(result);
     elem.attr("reset-finished", 1);
 }
 
