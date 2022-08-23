@@ -25,6 +25,7 @@
                 <span class="created_at">{tweet_created_at}</span>
             </div>
             <div class="text-row">{tweet_rich_full_text}</div>
+            <div class="card-row">{tweet_card_components}</div>
             {tweet_poll_component}
             <div class="media-row">
                 <!-- 图像 -->
@@ -32,7 +33,7 @@
                     {tweet_photos}
                 </div>
                 <!-- 视频 -->
-                <div class="media-videos-container">
+                <div class="media-videos-container video-count-{tweet_video_count}">
                     {tweet_videos}
                 </div>
             </div>

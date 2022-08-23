@@ -478,6 +478,10 @@ div.row.tweet-row .card-row .card-box-right .card-text-container span.card-descr
     -webkit-line-clamp: 2;
 }
 
+div.row.tweet-row .card-row .card-box-right .card-text-container span.card-description[data-description="0"] {
+    display: none;
+}
+
 div.row.tweet-row .card-row .card-box:hover span.card-title {
     text-decoration: solid 1px var(--link-blue);
 }
