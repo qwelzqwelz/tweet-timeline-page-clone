@@ -52,7 +52,7 @@ function media_init(box) {
     box.find(".video-box").twitterVideoPlayer();
 
     // 图片浏览
-    box.find(".media-photos-container").each(function() {
+    box.find(".media-photos-container, .tweet-card-photo-container").each(function() {
         new Viewer(this, PHOTO_VIEWER_SETTINGS);
     });
 }
