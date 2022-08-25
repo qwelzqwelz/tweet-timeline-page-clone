@@ -52,6 +52,21 @@ function _is_height_viewable(elem) {
     return pos.bottom >= 0 && pos.top <= w_height;
 }
 
+function set_video_capture(video, cap_container) {
+    const elem = document.createElement("canvas"),
+        ctx = elem.getContext("2d");
+
+    elem.setAttribute("height", video.offsetHeight);
+    elem.setAttribute("width", video.offsetWidth);
+    ctx.drawImage(video, 0, 0, video.offsetWidth, video.offsetHeight);
+
+    elem.toBlob(function(blob) {
+        const url = URL.createObjectURL(blob);
+        console.log(url);
+        cap_container.css("background-image", `url(${url})`);
+    });
+}
+
 window.twitterVideoPlayer = function($root) {
     const video = $root.first(".video-box");
     const video_element = $root.find("[data-video]");
@@ -177,7 +192,7 @@ window.twitterVideoPlayer = function($root) {
 
     function updateplayer() {
         // 进度条变化
-        var percentage = (vid.currentTime / vid.duration) * 100;
+        const percentage = (vid.currentTime / vid.duration) * 100;
         video_slider_rail.css({ width: percentage + "%" });
         video_slider_buffer.css({ left: percentage - 1 + "%" });
         video_count_time.text(getFormatedTime());
@@ -188,8 +203,12 @@ window.twitterVideoPlayer = function($root) {
         } else {
             ++not_h_viewable_times;
         }
-        if (not_h_viewable_times >= 10) {
+        if (not_h_viewable_times == 10) {
             vid.pause();
+            if (!video_reset.is(":visible")) {
+                set_video_capture(vid, video_preview);
+                video_preview.show();
+            }
         }
     }
 

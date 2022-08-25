@@ -79,10 +79,14 @@ class AutoLoadManager {
         if (_is_fullscreen()) {
             return null;
         }
-        const that = this;
+        const that = this,
+            url = window.location.href;
         // 本地文件禁用
-        this.finished = this.finished || window.location.href.indexOf(`file://`) === 0;
+        this.finished = this.finished || window.location.href.indexOf(`file://`) === 0 || url.indexOf("html") < 0;
         //
+        if (this.finished) {
+            this.no_more_tip.show();
+        }
         if (!this._is_touching_bottom() || this.fetch_lock || this.finished) {
             return null;
         }
@@ -92,7 +96,7 @@ class AutoLoadManager {
         this.fetch_lock = true;
         // 请求
         $.get(
-                window.location.href.replace(/\?.+$/, "").replace(/\.html$/, `/part-${that.max_part + 1}.html`),
+                url.replace(/\?.+$/, "").replace(/\.html$/, `/part-${that.max_part + 1}.html`),
                 function(data, status_code) {
                     data.split(that.split_line).forEach((elem) => {
                         elem = $(elem);

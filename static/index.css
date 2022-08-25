@@ -817,10 +817,6 @@ div.row.tweet-row .tweet-body div.right-container div.media-row .video-box video
     color: white;
 }
 
-.video-box.auto-loop .video-player-controls {
-    display: none;
-}
-
 div.row.tweet-row .tweet-body div.right-container div.media-row .video-from-footer {
     margin-top: 4px;
     border: none;

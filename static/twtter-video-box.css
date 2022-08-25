@@ -34,6 +34,11 @@
     -webkit-transition: all 1s;
 }
 
+.video-box.auto-loop::after,
+.video-box.no-controls::after {
+    opacity: 0;
+}
+
 .video-preview {
     position: absolute;
     width: 100%;
@@ -46,7 +51,7 @@
     background-origin: border-box;
     background-position: center;
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
     transition: all 0.3s ease;
 }
 
@@ -96,6 +101,11 @@
     padding-left: 10px;
     padding-right: 10px;
     padding-bottom: 10px;
+}
+
+.video-box.no-controls .video-player-controls,
+.video-box.auto-loop .video-player-controls {
+    display: none;
 }
 
 .video-player-controls .row {

@@ -12,11 +12,35 @@
         body a {
             display: block;
             margin-bottom: 10px;
+            width: fit-content;
+        }
+        
+        body {
+            display: flex;
+            flex-wrap: revert;
+        }
+        
+        body>div.link-container {
+            width: 50%;
+            border: lightblue 1px dashed;
+            margin: 12px;
+            padding: 12px;
+        }
+        
+        @media screen and (max-width: 768px) {
+            body {
+                flex-wrap: wrap;
+            }
+            body>div.link-container {
+                width: 100%;
+            }
         }
     </style>
 </head>
 
 <body>
+    <div class="link-container-0 link-container"></div>
+    <div class="link-container-1 link-container"></div>
 </body>
 
 </html>
