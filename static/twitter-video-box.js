@@ -45,6 +45,13 @@ function _is_fullscreen() {
     );
 }
 
+function _is_height_viewable(elem) {
+    const pos = elem.getBoundingClientRect(),
+        w_height = window.innerHeight || document.documentElement.clientHeight;
+
+    return pos.bottom >= 0 && pos.top <= w_height;
+}
+
 window.twitterVideoPlayer = function($root) {
     const video = $root.first(".video-box");
     const video_element = $root.find("[data-video]");
@@ -81,7 +88,8 @@ window.twitterVideoPlayer = function($root) {
 
     let auto_loop = video.hasClass("auto-loop"),
         raw_container = null,
-        last_scroll_top = 0;
+        last_scroll_top = 0,
+        not_h_viewable_times = 0;
 
     function play() {
         vid.play();
@@ -168,11 +176,21 @@ window.twitterVideoPlayer = function($root) {
     }
 
     function updateplayer() {
+        // 进度条变化
         var percentage = (vid.currentTime / vid.duration) * 100;
         video_slider_rail.css({ width: percentage + "%" });
         video_slider_buffer.css({ left: percentage - 1 + "%" });
         video_count_time.text(getFormatedTime());
         video_count_fulltime.text(getFormatedFullTime());
+        // 检测到不在屏幕中显示时，暂停播放
+        if (_is_height_viewable(vid)) {
+            not_h_viewable_times = 0;
+        } else {
+            ++not_h_viewable_times;
+        }
+        if (not_h_viewable_times >= 10) {
+            vid.pause();
+        }
     }
 
     function getTimeState() {

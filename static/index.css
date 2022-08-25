@@ -397,7 +397,7 @@ div.row.tweet-row .tweet-body div.right-container div.text-row {
 }
 
 
-/* tweet-body: card-row card-box */
+/* tweet-body: card-row .card-box */
 
 div.row.tweet-row .card-row {
     margin-right: 12px;
@@ -464,13 +464,14 @@ div.row.tweet-row .card-row .card-box-right .card-text-container span.card-title
 
 div.row.tweet-row .card-row .card-box:hover .card-text-container span.card-title::after {
     width: 100%;
-    height: 1px;
+    height: 0;
+    border: none;
+    border-top: 1px solid rgb(29, 155, 240);
     content: "";
     position: absolute;
-    bottom: 3px;
+    bottom: 2px;
     left: 0;
     display: inline-block;
-    background-color: rgb(29, 155, 240);
 }
 
 div.row.tweet-row .card-row .card-box-right .card-text-container span.card-description {
@@ -487,7 +488,29 @@ div.row.tweet-row .card-row .card-box:hover span.card-title {
 }
 
 
-/* tweet-body: card-row tweet-card-box */
+/* tweet-body: card-row .card-box.large */
+
+div.row.tweet-row .card-row .card-box.large {
+    flex-direction: column;
+    height: 408px;
+}
+
+div.row.tweet-row .card-row .card-box.large .card-box-left {
+    width: 100%;
+    height: 300px;
+}
+
+div.row.tweet-row .card-row .card-box.large .card-box-left img {
+    width: 100%;
+    height: 300px;
+}
+
+div.row.tweet-row .card-row .card-box.large .card-box-right {
+    height: 108px;
+}
+
+
+/* tweet-body: card-row .tweet-card-box */
 
 div.row.tweet-row .tweet-card-box {
     max-width: 550px;
@@ -591,6 +614,12 @@ div.row.tweet-row .tweet-card-box .tweet-card-photo-container.photo-count-3 .pho
     div.row.tweet-row .tweet-card-box .tweet-card-photo-container.photo-count-3 .photo-box:first-of-type {
         min-height: 200px;
         max-height: 240px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    div.row.tweet-row .tweet-card-box .tweet-card-author-row {
+        flex-wrap: wrap;
     }
 }
 
@@ -786,6 +815,10 @@ div.row.tweet-row .tweet-body div.right-container div.media-row .video-box video
     line-height: 20px;
     font-weight: 400;
     color: white;
+}
+
+.video-box.auto-loop .video-player-controls {
+    display: none;
 }
 
 div.row.tweet-row .tweet-body div.right-container div.media-row .video-from-footer {
