@@ -563,6 +563,10 @@ div.row.tweet-row .tweet-card-box .tweet-card-video-container .video-box {
     border-radius: 0;
 }
 
+div.row.tweet-row .tweet-card-box .video-from-footer {
+    display: none;
+}
+
 div.row.tweet-row .tweet-card-box .tweet-card-photo-container {
     width: 100%;
     display: flex;
