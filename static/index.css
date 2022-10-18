@@ -588,6 +588,7 @@ div.row.tweet-row .tweet-card-box .tweet-card-photo-container.photo-count-1 .pho
 }
 
 div.row.tweet-row .tweet-card-box .tweet-card-photo-container.photo-count-1 .photo-box {
+    width: 100%;
     max-width: 550px;
     max-height: 300px;
 }
