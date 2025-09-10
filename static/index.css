@@ -820,6 +820,11 @@ div.row.tweet-row .tweet-body div.right-container div.media-row .video-box video
     color: white;
 }
 
+/* x.com 无视频浏览量数据 */
+.video-box .video-views {
+    display: none;
+}
+
 div.row.tweet-row .tweet-body div.right-container div.media-row .video-from-footer {
     margin-top: 4px;
     border: none;
